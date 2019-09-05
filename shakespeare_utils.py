@@ -132,10 +132,11 @@ print("Loading model...")
 model = load_model('models/model_shakespeare_kiank_350_epoch.h5')
 
 
-def generate_output():
+def generate_output(length = 400):
     generated = ''
     #sentence = text[start_index: start_index + Tx]
     #sentence = '0'*Tx
+    print("\n\n")
     usr_input = input("Write the beginning of your poem, the Shakespeare machine will complete it. Your input is: ")
     # zero pad the sentence to Tx characters.
     sentence = ('{0:0>' + str(Tx) + '}').format(usr_input).lower()
@@ -143,7 +144,7 @@ def generate_output():
 
     sys.stdout.write("\n\nHere is your poem: \n\n") 
     sys.stdout.write(usr_input)
-    for i in range(400):
+    for i in range(length):
 
         x_pred = np.zeros((1, Tx, len(chars)))
 
@@ -163,3 +164,7 @@ def generate_output():
 
         if next_char == '\n':
             continue
+
+    print()
+
+    return generated
